@@ -27,6 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
   }
 
+  /* ---------- process accordion ---------- */
+  const processAccordion = document.querySelector('.process-accordion');
+  if (processAccordion) {
+    const rows = processAccordion.querySelectorAll('.process-row');
+    rows.forEach(row => {
+      const head = row.querySelector('.process-row-head');
+      head?.addEventListener('click', () => {
+        const isOpen = row.classList.contains('is-open');
+        rows.forEach(r => r.classList.remove('is-open'));
+        if (!isOpen) row.classList.add('is-open');
+      });
+    });
+  }
+
   /* ---------- reveal on scroll ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {
