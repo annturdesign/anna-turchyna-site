@@ -542,6 +542,25 @@ section{ position: relative; }
   #testi-track > .testi-card:nth-child(n+8){ display:none; }
 }
 
+.marquee-nav{ display:none; }
+.marquee-arrow{
+  width:44px; height:44px; border-radius:50%;
+  border:1px solid var(--c-line); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition: background .2s var(--ease), border-color .2s var(--ease);
+  padding:0;
+}
+.marquee-arrow:active{ background:var(--c-bg-soft); }
+.marquee-arrow .arrow-chevron{
+  width:9px; height:9px;
+  border-right:2px solid var(--c-ink); border-bottom:2px solid var(--c-ink);
+}
+.marquee-arrow.prev .arrow-chevron{ transform: rotate(135deg); margin-left:3px; }
+.marquee-arrow.next .arrow-chevron{ transform: rotate(-45deg); margin-right:3px; }
+@media (max-width:760px){
+  .marquee-nav{ display:flex; justify-content:center; gap:16px; margin-top:22px; }
+}
+
 /* ===========================================================
    PROCESS (My Process)
    =========================================================== */
