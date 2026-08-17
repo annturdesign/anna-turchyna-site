@@ -48,7 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const marquee = track?.closest('.marquee');
       if (!marquee) return;
       const dir = btn.classList.contains('prev') ? -1 : 1;
-      marquee.scrollBy({ left: dir * marquee.clientWidth * 0.88, behavior: 'smooth' });
+      // Each card is exactly one full "page" wide on mobile, so scrolling
+      // by one clientWidth lands precisely on the next/previous card.
+      marquee.scrollBy({ left: dir * marquee.clientWidth, behavior: 'smooth' });
     });
   });
 

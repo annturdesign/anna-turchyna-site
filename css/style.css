@@ -149,6 +149,12 @@ section{ position: relative; }
   border-color: rgba(255,255,255,.2);
 }
 .btn-on-dark:hover{ background: rgba(255,255,255,.16); }
+.btn-blue{
+  background: var(--c-blue-600);
+  color: var(--c-white);
+  box-shadow: 0 8px 24px -8px rgba(33,64,163,.45);
+}
+.btn-blue:hover{ background: var(--c-blue-700); box-shadow: 0 12px 30px -8px rgba(33,64,163,.5); }
 .btn-block{ width:100%; }
 .btn-sm{ padding: 10px 18px; font-size: 13.5px; }
 
@@ -461,7 +467,7 @@ section{ position: relative; }
 }
 .service-panel .icon-illustration{
   position:absolute; top: -13%; right: -10%;
-  width: 380px; height:380px;
+  width: 500px; height:500px;
   object-fit: contain;
   filter: drop-shadow(0 25px 40px rgba(4,10,35,.45));
   pointer-events: none;
@@ -529,36 +535,44 @@ section{ position: relative; }
   .marquee-track{ animation: none; overflow-x: auto; }
 }
 
-/* on narrow screens the auto-scrolling marquee just shows random half-cut
-   cards with no way to touch-control it, which reads as broken. Turn it
-   into a normal swipeable row instead: stop the animation, let the browser
-   handle horizontal scroll with snapping, and hide the duplicate second
-   half of cards (it only existed to make the infinite-scroll loop seamless) */
+/* On narrow screens the auto-scrolling marquee just shows random half-cut
+   cards with no way to touch-control it, which reads as broken. On mobile
+   it becomes a proper one-at-a-time carousel instead: one full-width card
+   per "page", snapping precisely (mandatory, not proximity), with prev/next
+   arrows overlaid on the sides of the visible card so browsing doesn't rely
+   on open-ended touch scrolling alone. */
+.marquee-wrap{ position:relative; }
+.marquee-arrow{ display:none; }
 @media (max-width:760px){
   .marquee{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  .marquee-track{ animation:none !important; scroll-snap-type:x proximity; }
-  .marquee-card{ scroll-snap-align:start; }
+  /* the base rule sets width:max-content so desktop's translateX(-50%) loop
+     measures correctly; that makes a percentage flex-basis on the cards
+     ambiguous (a max-content box has no definite width for children to take
+     a % of). Giving the track a definite width here (100% of .marquee) lets
+     each full-width card resolve against it correctly. */
+  .marquee-track{ animation:none !important; scroll-snap-type:x mandatory; width:100%; }
+  .marquee-card{ flex-basis:100%; scroll-snap-align:center; }
+  .testi-card{ flex-basis:100%; scroll-snap-align:center; }
   #featured-track > .marquee-card:nth-child(n+8){ display:none; }
   #testi-track > .testi-card:nth-child(n+8){ display:none; }
-}
 
-.marquee-nav{ display:none; }
-.marquee-arrow{
-  width:44px; height:44px; border-radius:50%;
-  border:1px solid var(--c-line); background:#fff;
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; transition: background .2s var(--ease), border-color .2s var(--ease);
-  padding:0;
-}
-.marquee-arrow:active{ background:var(--c-bg-soft); }
-.marquee-arrow .arrow-chevron{
-  width:9px; height:9px;
-  border-right:2px solid var(--c-ink); border-bottom:2px solid var(--c-ink);
-}
-.marquee-arrow.prev .arrow-chevron{ transform: rotate(135deg); margin-left:3px; }
-.marquee-arrow.next .arrow-chevron{ transform: rotate(-45deg); margin-right:3px; }
-@media (max-width:760px){
-  .marquee-nav{ display:flex; justify-content:center; gap:16px; margin-top:22px; }
+  .marquee-arrow{
+    display:flex; position:absolute; top:50%; transform:translateY(-50%);
+    width:40px; height:40px; border-radius:50%; z-index:2;
+    border:1px solid var(--c-line); background:rgba(255,255,255,.92);
+    align-items:center; justify-content:center;
+    cursor:pointer; padding:0; box-shadow: 0 6px 18px -6px rgba(10,20,60,.3);
+    transition: background .2s var(--ease);
+  }
+  .marquee-arrow:active{ background:var(--c-bg-soft); }
+  .marquee-arrow.prev{ left:10px; }
+  .marquee-arrow.next{ right:10px; }
+  .marquee-arrow .arrow-chevron{
+    width:9px; height:9px;
+    border-right:2px solid var(--c-ink); border-bottom:2px solid var(--c-ink);
+  }
+  .marquee-arrow.prev .arrow-chevron{ transform: rotate(135deg); margin-left:3px; }
+  .marquee-arrow.next .arrow-chevron{ transform: rotate(-45deg); margin-right:3px; }
 }
 
 /* ===========================================================
@@ -789,6 +803,12 @@ section{ position: relative; }
 .offer-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
 @media (max-width:760px){ .offer-grid{ grid-template-columns:1fr; } }
 .offer-grid .price-card{ background:var(--c-white); }
+.price-card-image{
+  aspect-ratio: 16/9; border-radius: var(--radius-md); margin-bottom: 22px;
+  background: linear-gradient(150deg, var(--c-blue-100), var(--c-blue-50));
+  display:flex; align-items:center; justify-content:center;
+  color: var(--c-blue-400); font-size:13px; letter-spacing:.05em; text-transform:uppercase;
+}
 
 /* ---------- portfolio grid ---------- */
 .portfolio-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 28px; }
