@@ -103,7 +103,19 @@
       </div>
     </a>
   `;
-  featuredTrack.innerHTML = FEATURED_CASES.map(featuredCardHTML).join('') + FEATURED_CASES.map(featuredCardHTML).join('');
+  // On mobile the track is a plain swipeable row (no CSS auto-scroll), so it
+  // must contain each card exactly once. On desktop the CSS animation scrolls
+  // a translateX(-50%) loop, which needs the content duplicated so the loop
+  // reads as seamless. Deciding this in JS (instead of rendering both sets
+  // and hiding the extras with CSS) avoids relying on the hidden duplicates
+  // never affecting scrollWidth, which isn't consistent across browsers.
+  const featuredMobileQuery = window.matchMedia('(max-width:760px)');
+  const renderFeaturedTrack = () => {
+    const cards = FEATURED_CASES.map(featuredCardHTML).join('');
+    featuredTrack.innerHTML = featuredMobileQuery.matches ? cards : cards + cards;
+  };
+  renderFeaturedTrack();
+  featuredMobileQuery.addEventListener('change', renderFeaturedTrack);
 </script>
 
 <!-- ================= ABOUT ================= -->
@@ -305,7 +317,16 @@
       <div class="testi-person"><div class="testi-avatar"${avatar ? ` style="background-image:url('${avatar}')"` : ''}></div><div><div class="name">${name}</div><div class="role">${role || ''}</div></div></div>
     </div>
   `;
-  testiTrack.innerHTML = TESTIMONIALS.map(testiCardHTML).join('') + TESTIMONIALS.map(testiCardHTML).join('');
+  // Same reasoning as the featured-projects track above: render once on
+  // mobile (plain swipeable row) and twice on desktop (seamless auto-scroll
+  // loop), decided in JS rather than hiding duplicates with CSS.
+  const testiMobileQuery = window.matchMedia('(max-width:760px)');
+  const renderTestiTrack = () => {
+    const cards = TESTIMONIALS.map(testiCardHTML).join('');
+    testiTrack.innerHTML = testiMobileQuery.matches ? cards : cards + cards;
+  };
+  renderTestiTrack();
+  testiMobileQuery.addEventListener('change', renderTestiTrack);
 </script>
 
 <!-- ================= BRAND QUIZ ================= -->
