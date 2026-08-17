@@ -55,7 +55,7 @@
   <div class="container">
     <div class="hero-inner">
       <span class="eyebrow reveal">BRAND SYSTEMS FOR GROWTH-READY FOUNDERS</span>
-      <h1 class="reveal">When did you last update your brand's <span class="accent" data-rotate-words='["look?","logo?","system?","guide?","feel?"]'>look?</span></h1>
+      <h1 class="reveal">When did you last update your brand's <span class="accent" data-rotate-words='["look?","logo?","system?","guidelines?","feel?"]'>look?</span></h1>
       <p class="lead reveal">If it's been a while, you're not alone. Most founders wait longer than they should.</p>
       <div class="hero-actions reveal">
         <a href="index.html#services" class="btn btn-primary">My services</a>
@@ -103,7 +103,7 @@
 <section class="section-pad tight" style="background:var(--c-bg-soft)">
   <div class="container">
     <p class="about-statement reveal">I help founders bring clarity and consistency to their brands that have outgrown their current identity.</p>
-    <p class="about-statement reveal accent">The result: a brand that finally looks as credible as the business you've built.</p>
+    <p class="about-statement reveal accent"><strong>The result: a brand that finally looks as credible as the business you've built.</strong></p>
   </div>
 </section>
 
@@ -283,17 +283,19 @@
 </section>
 <script>
   const TESTIMONIALS = [
-    ["Anna did a fantastic job on our website redesign and new branding concept. We are thrilled with her work and will be hiring her again.", "[Name]"],
-    ["Anna was the best possible choice we could've gone with to design our logo. Forever in gratitude for her great work, we will definitely work with her again.", "David"],
-    ["This was a really great experience working with Anna. Her patience and ability to work with us through some changes were exceptional along with the quality and pace of her work. A very talented, truly professional and highly skilled designer.", "[Name]"],
-    ["Anna is not only a skilled designer but also a joy to work with. Her combination of creativity, dedication, and enthusiasm made our collaboration both productive and enjoyable. She brought fresh ideas and demonstrated exceptional teamwork.", "Jeroen van Drunen"],
-    ["Anna has been an incredible asset to our company, consistently delivering outstanding results across multiple projects. Her expertise and dedication have driven the success of each initiative we've worked on together.", "Jenny"],
+    ["Anna did a fantastic job on our website redesign and new branding concept. We are thrilled with her work and will be hiring her again.", "Stacey Kelly", "Marketing Director at IMN", "images/testimonials/stacey-kelly.jpg"],
+    ["Anna was the best possible choice we could've gone with to design our logo. Forever in gratitude for her great work, we will definitely work with her again.", "David Lerner", "CEO of MAGLYNX", "images/testimonials/david-lerner.jpg"],
+    ["Anna is not only a skilled designer but also a joy to work with. Her combination of creativity, dedication, and enthusiasm made our collaboration both productive and enjoyable. She brought fresh ideas and demonstrated exceptional teamwork.", "Jeroen van Drunen", "CEO of Design Panda", "images/testimonials/jeroen-van-drunen.jpg"],
+    ["Anna has been an incredible asset to our company, consistently delivering outstanding results across multiple projects. Her expertise and dedication have driven the success of each initiative we've worked on together.", "Jenny Schneider", "Media J", "images/testimonials/jenny-schneider.png"],
+    ["Very communicative. Great ideas. Open to feedback. Very easy to work with. Highly recommend!", "Jessie Schofer", "Founder at Stakkd", "images/testimonials/jessie-schofer.png"],
+    ["Anna has excellent design skills. She was very responsive and quick to implement desired changes. She is an absolute pleasure to work with, we would recommend her to anyone seeking a creative design professional.", "Mac Johnson", "Marketing Manager at Strong CRM", "images/testimonials/mac-johnson.jpg"],
+    ["Really good collaboration. She worked in a logo for a music band, and she delivered some prototypes really quickly. Once we agreed on one, she prepared the final version also in a couple of days. The quality of her work is really good, fully aligned with our needs!", "Gonzalo Rubio", "Co-founder of SEIZU", "images/testimonials/gonzalo-rubio.jpg"],
   ];
   const testiTrack = document.getElementById('testi-track');
-  const testiCardHTML = ([quote, name]) => `
+  const testiCardHTML = ([quote, name, role, avatar]) => `
     <div class="testi-card">
       <p class="testi-quote">"${quote}"</p>
-      <div class="testi-person"><div class="testi-avatar"></div><div><div class="name">${name}</div><div class="role">[Role] @ [Company]</div></div></div>
+      <div class="testi-person"><div class="testi-avatar"${avatar ? ` style="background-image:url('${avatar}')"` : ''}></div><div><div class="name">${name}</div><div class="role">${role || ''}</div></div></div>
     </div>
   `;
   testiTrack.innerHTML = TESTIMONIALS.map(testiCardHTML).join('') + TESTIMONIALS.map(testiCardHTML).join('');
