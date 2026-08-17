@@ -41,19 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- marquee prev/next arrows (mobile swipeable rows) ---------- */
-  document.querySelectorAll('.marquee-arrow').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const track = document.getElementById(btn.getAttribute('data-marquee-target'));
-      const marquee = track?.closest('.marquee');
-      if (!marquee) return;
-      const dir = btn.classList.contains('prev') ? -1 : 1;
-      // Each card is exactly one full "page" wide on mobile, so scrolling
-      // by one clientWidth lands precisely on the next/previous card.
-      marquee.scrollBy({ left: dir * marquee.clientWidth, behavior: 'smooth' });
-    });
-  });
-
   /* ---------- reveal on scroll ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {

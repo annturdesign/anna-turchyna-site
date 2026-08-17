@@ -538,11 +538,8 @@ section{ position: relative; }
 /* On narrow screens the auto-scrolling marquee just shows random half-cut
    cards with no way to touch-control it, which reads as broken. On mobile
    it becomes a proper one-at-a-time carousel instead: one full-width card
-   per "page", snapping precisely (mandatory, not proximity), with prev/next
-   arrows overlaid on the sides of the visible card so browsing doesn't rely
-   on open-ended touch scrolling alone. */
+   per "page", snapping precisely (mandatory, not proximity), swiped by hand. */
 .marquee-wrap{ position:relative; }
-.marquee-arrow{ display:none; }
 @media (max-width:760px){
   .marquee{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
   /* the base rule sets width:max-content so desktop's translateX(-50%) loop
@@ -555,24 +552,6 @@ section{ position: relative; }
   .testi-card{ flex-basis:100%; scroll-snap-align:center; }
   #featured-track > .marquee-card:nth-child(n+8){ display:none; }
   #testi-track > .testi-card:nth-child(n+8){ display:none; }
-
-  .marquee-arrow{
-    display:flex; position:absolute; top:50%; transform:translateY(-50%);
-    width:40px; height:40px; border-radius:50%; z-index:2;
-    border:1px solid var(--c-line); background:rgba(255,255,255,.92);
-    align-items:center; justify-content:center;
-    cursor:pointer; padding:0; box-shadow: 0 6px 18px -6px rgba(10,20,60,.3);
-    transition: background .2s var(--ease);
-  }
-  .marquee-arrow:active{ background:var(--c-bg-soft); }
-  .marquee-arrow.prev{ left:10px; }
-  .marquee-arrow.next{ right:10px; }
-  .marquee-arrow .arrow-chevron{
-    width:9px; height:9px;
-    border-right:2px solid var(--c-ink); border-bottom:2px solid var(--c-ink);
-  }
-  .marquee-arrow.prev .arrow-chevron{ transform: rotate(135deg); margin-left:3px; }
-  .marquee-arrow.next .arrow-chevron{ transform: rotate(-45deg); margin-right:3px; }
 }
 
 /* ===========================================================
@@ -831,7 +810,7 @@ section{ position: relative; }
 /* ===========================================================
    BRAND QUIZ
    =========================================================== */
-.quiz-intro-text{ color:var(--c-ink-soft); font-size:16px; max-width:640px; margin:-24px 0 44px; }
+#quiz.section-pad{ padding: 70px 0; }
 .quiz-card{
   position: relative;
   overflow: hidden;
@@ -845,20 +824,7 @@ section{ position: relative; }
   justify-content:center;
   box-shadow: 0 30px 60px -30px rgba(10,20,60,.5);
 }
-.quiz-card .quiz-icon{
-  position:absolute; top: -13%; right: -10%;
-  width: 380px; height:380px;
-  object-fit: contain;
-  filter: drop-shadow(0 25px 40px rgba(4,10,35,.45));
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity .3s var(--ease);
-}
-.quiz-card .quiz-icon.is-hidden{ opacity:0; }
 .quiz-card .quiz-panel{ position:relative; z-index:1; }
-@media (max-width:760px){
-  .quiz-card .quiz-icon{ width:230px; height:230px; top:-9%; right:-9%; }
-}
 .quiz-panel[hidden]{ display:none; }
 .quiz-card-heading{ font-size: clamp(28px, 3.4vw, 40px); margin:14px 0 20px; max-width:600px; }
 .quiz-start-copy{ color:rgba(255,255,255,.82); font-size:16px; max-width:660px; margin:0 0 28px; }
@@ -893,7 +859,8 @@ section{ position: relative; }
 .quiz-result-actions{ display:flex; gap:14px; flex-wrap:wrap; }
 
 @media (max-width:600px){
-  .quiz-card{ padding:28px 22px; }
+  #quiz.section-pad{ padding: 44px 0; }
+  .quiz-card{ padding:28px 22px; min-height:0; }
   .quiz-result-actions{ flex-direction:column; }
   .quiz-result-actions .btn{ width:100%; }
 }
