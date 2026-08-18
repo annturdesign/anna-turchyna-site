@@ -831,11 +831,11 @@ section{ position: relative; }
 .case-about-block h3{ font-size:19px; margin-bottom:10px; }
 .case-about-block p{ color:var(--c-ink-soft); margin:0; max-width:720px; }
 .case-gallery-wrap{ max-width: 1400px; }
-.case-gallery{ display:flex; flex-direction:column; gap:28px; }
-.case-gallery img{ width:100%; display:block; border-radius: var(--radius-lg); border:1px solid var(--c-line); }
+.case-gallery{ display:flex; flex-direction:column; gap:16px; }
+.case-gallery img{ width:100%; display:block; border-radius: var(--radius-lg); }
 .case-img{
-  opacity:0; transform: translateY(56px) scale(1.045);
-  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+  opacity:0; transform: translateY(20px) scale(1.015);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
 }
 .case-img.is-visible{ opacity:1; transform:none; }
 @media (max-width: 900px){
