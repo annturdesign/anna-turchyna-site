@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- reveal on scroll ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal, .case-img');
   if ('IntersectionObserver' in window && revealEls.length) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

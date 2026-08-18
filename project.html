@@ -55,17 +55,25 @@
   </div>
 </div>
 
-<section class="page-hero">
-  <div class="mesh light"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
-  <div class="container">
-    <span class="eyebrow reveal" id="case-tag">PROJECT</span>
+<section class="case-hero">
+  <div class="case-hero-media"><img id="case-hero-img" src="" alt=""></div>
+  <div class="case-hero-scrim"></div>
+  <div class="container case-hero-text">
+    <span class="eyebrow on-dark reveal" id="case-tag">PROJECT</span>
     <h1 class="reveal" id="case-title">Loading</h1>
   </div>
 </section>
 
 <section class="section-pad tight" id="case-about-section" style="display:none">
-  <div class="container" style="max-width:820px">
-    <div class="case-about" id="case-about"></div>
+  <div class="container">
+    <div class="case-row reveal" id="case-row-summary">
+      <span class="case-row-label">Project Summary</span>
+      <div class="case-row-body" id="case-summary-body"></div>
+    </div>
+    <div class="case-row reveal" id="case-row-process">
+      <span class="case-row-label">Process &amp; Challenges</span>
+      <div class="case-row-body" id="case-process-body"></div>
+    </div>
   </div>
 </section>
 
@@ -170,20 +178,33 @@
     document.getElementById('case-tag').textContent = data.tag.toUpperCase();
     document.getElementById('case-title').textContent = data.name;
 
-    if (data.challenge || data.solution) {
-      const aboutSection = document.getElementById('case-about-section');
-      const about = document.getElementById('case-about');
-      let html = '';
-      if (data.challenge) html += `<div class="case-about-block"><h3>The challenge</h3><p>${data.challenge}</p></div>`;
-      if (data.solution) html += `<div class="case-about-block"><h3>What I did</h3><p>${data.solution}</p></div>`;
-      about.innerHTML = html;
-      aboutSection.style.display = '';
+    const heroImg = document.getElementById('case-hero-img');
+    heroImg.src = `images/portfolio/${slug}/1.jpg`;
+    heroImg.alt = `${data.name} brand identity, cover image`;
+
+    const aboutSection = document.getElementById('case-about-section');
+    const summaryRow = document.getElementById('case-row-summary');
+    const processRow = document.getElementById('case-row-process');
+    let anyRow = false;
+    if (data.challenge) {
+      document.getElementById('case-summary-body').innerHTML = `<p>${data.challenge}</p>`;
+      anyRow = true;
+    } else {
+      summaryRow.style.display = 'none';
     }
+    if (data.solution) {
+      document.getElementById('case-process-body').innerHTML = `<p>${data.solution}</p>`;
+      anyRow = true;
+    } else {
+      processRow.style.display = 'none';
+    }
+    if (anyRow) aboutSection.style.display = '';
 
     const gallery = document.getElementById('case-gallery');
     let imgs = '';
     for (let i = 1; i <= data.count; i++) {
-      imgs += `<img src="images/portfolio/${slug}/${i}.jpg" alt="${data.name} brand identity, image ${i}" loading="lazy">`;
+      const delay = (i % 4) * 90;
+      imgs += `<div class="case-img" style="transition-delay:${delay}ms"><img src="images/portfolio/${slug}/${i}.jpg" alt="${data.name} brand identity, image ${i}" loading="lazy"></div>`;
     }
     gallery.innerHTML = imgs;
   } else {
