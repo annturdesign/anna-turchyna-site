@@ -12,7 +12,7 @@ Plain HTML/CSS/JS, no build step, no dependencies (except Google Fonts, loaded v
 
 ## What's real vs placeholder
 - Copy: final, matches the approved text doc.
-- Pricing: real (The Clarity Kit / The Brand System / The Brand Partnership).
+- Pricing: real (The Brand DNA Workshop / The Brand System / The Brand Partnership).
 - Numbers: real (6+ / 40+ / 100%).
 - Portfolio: 8 placeholder cases (no real images/case studies yet).
 - Testimonials: placeholder, needs 3–6 real quotes before launch.
